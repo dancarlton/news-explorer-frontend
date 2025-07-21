@@ -1,0 +1,41 @@
+.about {
+  display: flex;
+  justify-content: space-between;
+  height: 624px;
+  width: 100vw;
+  padding: 80px 104px;
+}
+
+.about__image {
+  border-radius: 999px;
+  height: 464px;
+  width: 464px;
+  background-image: url('../../assets/images/colombia-headshot.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.about__container {
+  justify-content: center;
+  align-items: center;
+  padding: 56px;
+}
+
+.about__title {
+  font-size: 40px;
+  line-height: 46px;
+  font-family: 'Roboto Slab';
+  font-weight: 400;
+  margin-bottom: 24px;
+}
+
+.about__paragraph {
+  font-family: 'Roboto';
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 24px;
+}
+
+.about__paragraph-1 {
+    margin-bottom: 20px;
+}
