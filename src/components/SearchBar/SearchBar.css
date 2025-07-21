@@ -1,0 +1,39 @@
+.searchbar {
+  display: flex;
+  width: 100%;
+  max-width: 608px;
+  height: 64px;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.searchbar__input {
+  flex: 1;
+  border-radius: 0;
+  border: none;
+  font-size: 16px;
+  padding: 0 20px;
+}
+
+.searchbar__input::placeholder {
+  color: #b6bcbf;
+}
+
+.searchbar__button {
+  width: 168px;
+  background-color: #2f71e5;
+  color: white;
+  font-size: 18px;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.searchbar__button:hover {
+  background-color: #347eff;
+}
+
+.searchbar__button:active {
+    background-color: #2A65CC;
+}
