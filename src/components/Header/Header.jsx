@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import './Header.css'
-import { Link } from 'react-router'
+import { Link } from 'react-router-dom'
 
 export default function Header() {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
@@ -13,13 +13,13 @@ export default function Header() {
       <nav className='header__nav'>
         {isLoggedIn ? (
           <>
-            <Link to='/'>Home</Link>
-            <Link>Saved Articles</Link>
+            <Link className='header__nav-item' to='/'>Home</Link>
+            <Link className='header__nav-item'>Saved Articles</Link>
             <button className='header__profile-button'>Profile</button>
           </>
         ) : (
           <>
-            <Link to='/'>Home</Link>
+            <Link className='header__nav-item' to='/'>Home</Link>
             <button className='header__signin-button'>Sign in</button>
           </>
         )}

@@ -5,6 +5,8 @@
   height: 64px;
   border-radius: 999px;
   overflow: hidden;
+  background-color: white;
+  border-radius: 999px;
 }
 
 .searchbar__input {
