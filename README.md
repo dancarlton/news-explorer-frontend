@@ -47,7 +47,7 @@ NewsExplorer is a responsive React-based frontend app that allows users to searc
 
 1. **Clone the repo**
    ```
-   git clone https://github.com/dancarlton/newsexplorer-frontend.git
+   git clone https://github.com/dancarlton/news-explorer-frontend.git
    ```
 
 2. **Install dependencies**

@@ -1,7 +1,7 @@
 const baseUrl = 'https://localhost:3001/api'
 
 export async function fetchNews(userInput){
-    const response = await fetch(`${baseUrl}/news`, {
+    const response = await fetch(`${baseUrl}/articles`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'
