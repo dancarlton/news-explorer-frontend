@@ -7,7 +7,7 @@
   height: 80px;
   width: 100vw;
   z-index: 10;
-  border-bottom: .5px solid white;
+  border-bottom: 1px solid white;
   background-color: transparent;
 }
 
@@ -35,6 +35,14 @@
   color: white;
   font-family: 'Roboto';
   font-weight: 500;
+  position: relative;
+  padding-bottom: 25px;
+  text-decoration: none;
+  display: flex;
+  height: 100%;
+  align-items: flex-end;
+  justify-content: center;
+  margin-top: 30px;
 }
 
 .header__signin-button {
@@ -45,7 +53,19 @@
   font-size: 18px;
   line-height: 24px;
   color: white;
-  /* border-color: white; */
+  border: solid 1px white;
   font-family: 'Roboto';
   font-weight: 500;
+}
+
+.header__nav-item.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 150%;
+  height: 3px;
+  background-color: white;
+  border-radius: 999px;
 }
