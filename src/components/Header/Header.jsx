@@ -2,7 +2,7 @@ import { useState } from 'react'
 import './Header.css'
 import { Link, NavLink } from 'react-router'
 
-export default function Header() {
+export default function Header({ onLoginClick }) {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
 
   return (
@@ -45,7 +45,9 @@ export default function Header() {
                 </span>
               )}
             </NavLink>
-            <button className='header__signin-button'>Sign in</button>
+            <button className='header__signin-button' onClick={onLoginClick}>
+              Sign in
+            </button>
           </>
         )}
       </nav>

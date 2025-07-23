@@ -1,0 +1,134 @@
+.modal {
+  display: none;
+  position: fixed;
+  background-color: #0000004d;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
+
+.modal_opened {
+  display: flex;
+  visibility: visible;
+}
+
+.modal__content {
+  background-color: white;
+  position: relative;
+  padding: 40px 32px 36px;
+  max-width: 496px;
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: 20px;
+}
+
+.modal__close {
+  background-image: url("../../assets/images/close-button.svg");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  background-color: transparent;
+  width: 18px;
+  height: 18px;
+  position: absolute;
+  top: 25px;
+  right: 25px;
+  border: none;
+  cursor: pointer;
+}
+
+.modal__close:hover {
+  background-color: transparent;
+  filter: none;
+  opacity: 1;
+}
+
+.modal__title {
+    font-family: "Roboto";
+    font-weight: 900;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.modal__form {
+    display: flex;
+    flex-direction: column;
+    gap: 31px;
+}
+
+.modal__title {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 32px;
+  color: black;
+}
+
+.modal__label {
+  display: flex;
+  flex-direction: column;
+  font-size: 16px;
+  color: #2F71E5;
+  border-bottom: 1px solid black;
+  font-family: 'Inter';
+  font-weight: 400;
+}
+
+.modal__label_type_radio {
+  margin-bottom: 8px;
+  border: none;
+}
+
+.modal__input {
+  display: block;
+  border: none;
+  margin: 9px 0 10px 0;
+  padding: 0;
+  font-size: 14px;
+  font-family: 'Inter';
+  font-family: 400;
+}
+
+.modal__input:focus {
+  outline: none
+}
+
+.modal__button {
+    height: 64px;
+    background-color: #2F71E5;
+    border: none;
+    border-radius: 999px;
+    font-family: 'Roboto';
+    font-weight: 500;
+    font-size: 16px;
+    color: white;
+    margin: 15px 0 34px 0;
+}
+
+.modal__secondary {
+  color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  font-size: 16px;
+  position: absolute;
+  bottom: 25px;
+  left: 0;
+  right: 0;
+  font-family: 'Inter';
+  font-weight: 400;
+
+}
+
+.modal__secondary-button {
+    text-decoration: none;
+    background: none;
+    color: #2F71E5;
+    border: none;
+    font-size: 16px;
+}
