@@ -1,3 +1,4 @@
+/* NOT LOGGED IN */
 .header {
   display: flex;
   justify-content: space-between;
@@ -36,7 +37,7 @@
   font-family: 'Roboto';
   font-weight: 500;
   position: relative;
-  padding-bottom: 25px;
+  padding-bottom: 26px;
   text-decoration: none;
   display: flex;
   height: 100%;
@@ -45,7 +46,7 @@
   margin-top: 30px;
 }
 
-.header__signin-button {
+.header__button--signin {
   width: 176px;
   height: 48px;
   background-color: transparent;
@@ -69,4 +70,25 @@
   height: 3px;
   background-color: white;
   border-radius: 999px;
+}
+
+/* LOGGED IN */
+.header--logged-in {
+  background-color: white;
+}
+
+.header__logo--logged-in {
+  color: black;
+}
+
+.header__nav--logged-in {
+  color: black;
+}
+
+.header__nav-item--logged-in {
+  color: black;
+}
+
+.header__nav-item--logged-in.active::after {
+  background-color: black;
 }

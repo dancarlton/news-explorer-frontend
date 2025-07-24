@@ -57,6 +57,7 @@
 
 <!-- REGISTER MODAL COMPONENT -->
 - user enters name, email, and password into input fields
+- update states with onChange function taking the event and targeting the event value
 - on form submit:
   - prevent default browser behavior
   - collect values from input state
@@ -109,3 +110,55 @@
 - update app state to reflect logged-in user
 - update UI (e.g. Header) to show logged-in state
 - navigate user to onboarding or dashboard view
+
+
+
+
+<!------------ HANDLE LOGIN FLOW ------------>
+<!-- controller -->
+- define login async function
+- extract email and password from req.body
+- validate inputs
+- find user by email
+- catch error
+- compare provided password to hashed password using bycrpt.compare
+- generate jwt token using jwt.sign with user _id and jwt secret key
+- respond with status and json
+- catch errors
+
+<!-- backend routes -->
+- create /login route
+- route to login controller
+
+<!-- frontend api  -->
+- define loginUser async function
+- await the fetch to /users/login
+- post
+- method content type application json
+- send request as json.stringify
+- return parsed json
+- catch errors
+
+<!-- app -->
+- define async handleLogin function taking in email and password
+- try
+  - call loginUser function and await response
+  - destructure user, token from response
+  - store jwt token in local storage with 'jwt' key
+  - update userData state with user info
+  - setLogged in to true
+  - close modal and navigate to protected route
+  - catch error
+  - pass function to modal as prop
+
+<!-- modal -->
+- user inputs data in input fields
+  - onChange targets the events target value
+  - updates state
+- pass onLogin function from frontend api as prop
+- on form submit
+  - prevent default behavior
+  - extracts state data
+  - call onLogin api function and pass data as props
+  - error handle
+- pass handleSubmit as prop to modal with form

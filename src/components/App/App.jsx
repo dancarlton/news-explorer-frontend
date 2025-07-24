@@ -7,7 +7,7 @@ import Footer from '../Footer/Footer'
 import LoginModal from '../LoginModal/LoginModal'
 import RegisterModal from '../RegisterModal/RegisterModal'
 import SuccessModal from '../SuccessModal/SuccessModal'
-import { registerUser } from '../../api'
+import { loginUser, registerUser } from '../../api'
 
 function App() {
   const [activeModal, setActiveModal] = useState('')
@@ -19,10 +19,25 @@ function App() {
   const openSuccessModal = () => setActiveModal('success')
   const closeActiveModal = () => setActiveModal('')
 
+  const handleLogin = async (email, password) => {
+    try {
+      console.log('Login in user')
+      const { user, token } = await loginUser(email, password)
+      localStorage.setItem('jwt', token)
+      console.log('Successfully logged in user:', user)
+      setUserData(user)
+      setIsLoggedIn(true)
+      setActiveModal('')
+      navigate('/')
+    } catch (err) {
+      console.log('Error logging in user:', err)
+    }
+  }
+
   const handleRegister = async (email, password, userName) => {
     try {
       const { user, token } = await registerUser(email, password, userName)
-      localStorage.setItem(token)
+      localStorage.setItem('jwt', token)
       console.log('Successfully registered user', userName)
       setUserData(user)
       setIsLoggedIn(true)
@@ -39,6 +54,7 @@ function App() {
           onLoginClick={openLoginModal}
           onRegisterClick={openRegisterModal}
           onClose={closeActiveModal}
+          isLoggedIn={isLoggedIn}
         />
         <Main />
         <About />
@@ -49,6 +65,7 @@ function App() {
         isOpen={activeModal === 'login'}
         onRegisterClick={openRegisterModal}
         onClose={closeActiveModal}
+        onLogin={handleLogin}
       />
       <RegisterModal
         isOpen={activeModal === 'register'}

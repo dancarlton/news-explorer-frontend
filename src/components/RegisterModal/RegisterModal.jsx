@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { registerUser } from '../../api'
 import ModalWithForm from '../ModalWithForm/ModalWithForm'
 
 export default function RegisterModal({
@@ -30,7 +29,7 @@ export default function RegisterModal({
   return (
     <ModalWithForm
       isOpen={isOpen}
-      onClose={onClose}
+      //   onClose={onClose}
       title='Sign Up'
       buttonText='Sign Up'
       onSubmit={handleSubmit}
@@ -39,24 +38,30 @@ export default function RegisterModal({
         Email
         <input
           type='email'
+          value={email}
           placeholder='Enter email'
           className='modal__input'
+          onChange={e => setEmail(e.target.value)}
         />
       </label>
       <label htmlFor='password' className='modal__label'>
         Password
         <input
           type='password'
+          value={password}
           placeholder='Enter password'
           className='modal__input'
+          onChange={e => setPassword(e.target.value)}
         />
       </label>
       <label htmlFor='name' className='modal__label'>
         Username
         <input
           type='name'
+          value={userName}
           placeholder='Enter your username'
           className='modal__input'
+          onChange={e => setUserName(e.target.value)}
         />
       </label>
       <div className='modal__secondary'>

@@ -1,4 +1,4 @@
-const baseUrl = 'https://localhost:3001/api'
+const baseUrl = 'http://localhost:3001/api'
 
 export async function fetchNews(userInput) {
   const response = await fetch(`${baseUrl}/articles`, {
@@ -22,12 +22,29 @@ export async function registerUser(email, password, userName) {
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(email, password, userName),
+    body: JSON.stringify({ email, password, userName }),
   })
 
   if (!response.ok) {
     const errorBody = await response.json()
     throw new Error(errorBody.message || 'Failed to register')
+  }
+
+  return await response.json()
+}
+
+export async function loginUser(email, password) {
+  const response = await fetch(`${baseUrl}/users/login`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ email, password }),
+  })
+
+  if (!response.ok) {
+    const errorBody = await response.json()
+    throw new Error(errorBody.message || 'Failed to login')
   }
 
   return await response.json()

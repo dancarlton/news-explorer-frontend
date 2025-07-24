@@ -17,6 +17,10 @@
   padding: 0 20px;
 }
 
+.searchbar__input:focus {
+  outline: none;
+}
+
 .searchbar__input::placeholder {
   color: #b6bcbf;
 }
@@ -37,5 +41,5 @@
 }
 
 .searchbar__button:active {
-    background-color: #2A65CC;
+  background-color: #2a65cc;
 }
