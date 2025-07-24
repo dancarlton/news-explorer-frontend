@@ -7,12 +7,13 @@ import Footer from '../Footer/Footer'
 import LoginModal from '../LoginModal/LoginModal'
 import RegisterModal from '../RegisterModal/RegisterModal'
 import SuccessModal from '../SuccessModal/SuccessModal'
-import { loginUser, registerUser } from '../../api'
+import { fetchNews, loginUser, registerUser } from '../../api'
 
 function App() {
   const [activeModal, setActiveModal] = useState('')
   const [isLoggedIn, setIsLoggedIn] = useState(false)
-  const [userData, setUserData] = useState()
+  const [userData, setUserData] = useState('')
+  const [articles, setArticles] = useState([])
 
   const openLoginModal = () => setActiveModal('login')
   const openRegisterModal = () => setActiveModal('register')
@@ -47,6 +48,16 @@ function App() {
     }
   }
 
+  const handleSearch = async userInput => {
+    try {
+      const articles = await fetchNews(userInput)
+
+      setArticles(articles)
+    } catch (err) {
+      console.log('Error getting articles:', err)
+    }
+  }
+
   return (
     <div className='page'>
       <div className='page__content'>
@@ -56,7 +67,7 @@ function App() {
           onClose={closeActiveModal}
           isLoggedIn={isLoggedIn}
         />
-        <Main />
+        <Main onSearch={handleSearch} />
         <About />
         <Footer />
       </div>

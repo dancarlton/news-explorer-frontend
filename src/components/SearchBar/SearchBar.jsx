@@ -1,21 +1,15 @@
 import './SearchBar.css'
 import { useState } from 'react'
-import {fetchNews} from '../../api'
 
+export default function SearchBar({onSearch}) {
+  const [userInput, setUserInput] = useState('')
 
-export default function SearchBar() {
-    const [userInput, setUserInput] = useState('')
+  const handleSubmit = e => {
+    e.preventDefault()
 
-    const handleSubmit = e => {
-        e.preventDefault()
-
-        // call api fetch
-        fetchNews(userInput)
-
-        // clear search
-        setUserInput('')
-
-    }
+    onSearch(userInput)
+    setUserInput('')
+  }
 
   return (
     <>

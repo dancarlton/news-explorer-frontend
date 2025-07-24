@@ -1,7 +1,7 @@
 import SearchBar from '../SearchBar/SearchBar'
 import './Main.css'
 
-export default function Main() {
+export default function Main({onSearch}) {
   return (
     <main className='main'>
       <div className='main__content'>
@@ -10,7 +10,7 @@ export default function Main() {
           Find the news on any topic and save them in your personal account.
         </p>
 
-        <SearchBar />
+        <SearchBar onSearch={onSearch} />
       </div>
     </main>
   )
