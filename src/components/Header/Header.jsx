@@ -1,71 +1,80 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import './Header.css'
 import { Link, NavLink, useLocation } from 'react-router'
+import CurrentUserContext from '../../context/CurrentUserContext'
 
 export default function Header({ onLoginClick, isLoggedIn }) {
+  const user = useContext(CurrentUserContext)
   const { pathname } = useLocation()
   const savedNewsRoute = pathname === '/saved-news'
 
   return (
     <header
       className={`header ${
-        isLoggedIn && savedNewsRoute ? 'header--logged-in' : ''
+        isLoggedIn && savedNewsRoute ? 'header--saved-articles' : ''
       }`}
     >
       <div
         className={`header__logo ${
-          isLoggedIn && savedNewsRoute
-            ? 'header__logo--logged-in'
-            : ''
+          isLoggedIn && savedNewsRoute ? 'header__logo--saved-articles' : ''
         }`}
       >
         <Link to='/'>NewsExplorer</Link>
       </div>
       <nav
         className={`header__nav ${
-          isLoggedIn && savedNewsRoute
-            ? 'header__nav--logged-in'
-            : ''
+          isLoggedIn && savedNewsRoute ? 'header__nav--saved-articles' : ''
         }`}
       >
         {isLoggedIn ? (
           <>
-            <NavLink to='/'>
-              {({ isActive }) => (
-                <span
-                  className={`header__nav-item ${
-                    isLoggedIn && savedNewsRoute
-                      ? 'header__nav-item--logged-in'
-                      : ''
-                  }${isActive ? ' active' : ''}`}
-                >
-                  Home
-                </span>
-              )}
-            </NavLink>
+            <div className='header__center'>
+              <NavLink to='/'>
+                {({ isActive }) => (
+                  <span
+                    className={`header__nav-item ${
+                      isLoggedIn && savedNewsRoute
+                        ? 'header__nav-item--saved-articles'
+                        : ''
+                    }${isActive ? ' active' : ''}`}
+                  >
+                    Home
+                  </span>
+                )}
+              </NavLink>
 
-            <NavLink to='/saved-news'>
-              {({ isActive }) => (
-                <span
-                  className={`header__nav-item ${
+              <NavLink to='/saved-news'>
+                {({ isActive }) => (
+                  <span
+                    className={`header__nav-item ${
+                      isLoggedIn && savedNewsRoute
+                        ? 'header__nav-item--saved-articles'
+                        : ''
+                    }${isActive ? ' active' : ''}`}
+                  >
+                    Saved Articles
+                  </span>
+                )}
+              </NavLink>
+            </div>
+            <div className='header__button--wrapper'>
+              <button
+                className={`header__button--signout ${
+                  isLoggedIn && savedNewsRoute
+                    ? 'header__button--signout--saved-articles'
+                    : ''
+                }`}
+              >
+                {user.userName}
+                <div
+                  className={`header__button--icon ${
                     isLoggedIn && savedNewsRoute
-                      ? 'header__nav-item--logged-in'
+                      ? 'header__button--icon--saved-articles'
                       : ''
-                  }${isActive ? ' active' : ''}`}
-                >
-                  Saved Articles
-                </span>
-              )}
-            </NavLink>
-            <button
-              className={`header__button--profile ${
-                isLoggedIn && savedNewsRoute
-                  ? 'header__button--profile header__button--logged-in'
-                  : ''
-              }`}
-            >
-              Profile
-            </button>
+                  }`}
+                ></div>
+              </button>
+            </div>
           </>
         ) : (
           <>

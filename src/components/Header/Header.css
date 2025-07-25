@@ -10,6 +10,8 @@
   z-index: 10;
   border-bottom: 1px solid white;
   background-color: transparent;
+  flex-wrap: nowrap;
+  min-width: 0;
 }
 
 .header__logo {
@@ -21,6 +23,12 @@
   text-decoration: none;
 }
 
+.header__center {
+  display: flex;
+  align-items: center;
+  gap: 42px;
+}
+
 .header__nav {
   display: flex;
   align-items: center;
@@ -28,6 +36,7 @@
   font-size: 18px;
   line-height: 24px;
   color: white;
+  flex-wrap: nowrap;
 }
 
 .header__nav-item {
@@ -39,11 +48,17 @@
   position: relative;
   padding-bottom: 26px;
   text-decoration: none;
+  flex-wrap: nowrap;
   display: flex;
   height: 100%;
   align-items: flex-end;
   justify-content: center;
   margin-top: 30px;
+}
+
+.header__button--wrapper {
+  display: flex;
+  flex-shrink: 0;
 }
 
 .header__button--signin {
@@ -72,23 +87,56 @@
   border-radius: 999px;
 }
 
-/* LOGGED IN */
-.header--logged-in {
+.header__button--signout {
+  display: flex;
+  height: 48px;
+  width: 100%;
+  border: 1px solid white;
+  color: white;
+  border-radius: 999px;
+  font-family: 'Roboto';
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+  background-color: transparent;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 15px;
+}
+
+.header__button--icon {
+  background-image: url('../../assets/images/logout-white.svg');
+  height: 24px;
+  width: 24px;
+}
+
+/* SAVED ARTICLES PAGE */
+.header--saved-articles {
   background-color: white;
 }
 
-.header__logo--logged-in {
+.header__logo--saved-articles {
   color: black;
 }
 
-.header__nav--logged-in {
+.header__nav--saved-articles {
   color: black;
 }
 
-.header__nav-item--logged-in {
+.header__nav-item--saved-articles {
   color: black;
 }
 
-.header__nav-item--logged-in.active::after {
+.header__nav-item--saved-articles.active::after {
   background-color: black;
+}
+
+.header__button--signout--saved-articles {
+  color: black;
+  border: 1px solid black;
+}
+
+.header__button--icon--saved-articles {
+  background-image: url('../../assets/images/logout-black.svg');
 }

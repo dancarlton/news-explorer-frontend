@@ -9,6 +9,7 @@ import RegisterModal from '../RegisterModal/RegisterModal'
 import SuccessModal from '../SuccessModal/SuccessModal'
 import { fetchNews, loginUser, registerUser } from '../../api'
 import SearchResults from '../SearchResults/SearchResults'
+import CurrentUserContext from '../../context/CurrentUserContext'
 
 function App() {
   const [activeModal, setActiveModal] = useState('')
@@ -61,41 +62,56 @@ function App() {
     }
   }
 
+  const handleLogout = () => {
+    try {
+      console.log('User Logged Out')
+      localStorage.removeItem('jwt')
+    } catch (err) {
+      console.log('Could not log out user:', err)
+    }
+  }
+
   return (
-    <div className='page'>
-      <div className='page__content'>
-        <Header
-          onLoginClick={openLoginModal}
+    <CurrentUserContext.Provider value={userData}>
+      <div className='page'>
+        <div className='page__content'>
+          <Header
+            onLoginClick={openLoginModal}
+            onRegisterClick={openRegisterModal}
+            onClose={closeActiveModal}
+            isLoggedIn={isLoggedIn}
+          />
+          <Main onSearch={handleSearch} />
+          {showResults && (
+            <SearchResults
+              articles={articles}
+              isLoggedIn={isLoggedIn}
+              onLoginClick={openLoginModal}
+            />
+          )}
+          <About />
+          <Footer />
+        </div>
+
+        <LoginModal
+          isOpen={activeModal === 'login'}
           onRegisterClick={openRegisterModal}
           onClose={closeActiveModal}
-          isLoggedIn={isLoggedIn}
+          onLogin={handleLogin}
         />
-        <Main onSearch={handleSearch} />
-        {showResults && (
-          <SearchResults articles={articles} isLoggedIn={isLoggedIn} onLoginClick={openLoginModal}/>
-        )}
-        <About />
-        <Footer />
+        <RegisterModal
+          isOpen={activeModal === 'register'}
+          onLoginClick={openLoginModal}
+          onClose={closeActiveModal}
+          onRegister={handleRegister}
+        />
+        <SuccessModal
+          isOpen={activeModal === 'success'}
+          onLoginClick={openLoginModal}
+          onClose={closeActiveModal}
+        />
       </div>
-
-      <LoginModal
-        isOpen={activeModal === 'login'}
-        onRegisterClick={openRegisterModal}
-        onClose={closeActiveModal}
-        onLogin={handleLogin}
-      />
-      <RegisterModal
-        isOpen={activeModal === 'register'}
-        onLoginClick={openLoginModal}
-        onClose={closeActiveModal}
-        onRegister={handleRegister}
-      />
-      <SuccessModal
-        isOpen={activeModal === 'success'}
-        onLoginClick={openLoginModal}
-        onClose={closeActiveModal}
-      />
-    </div>
+    </CurrentUserContext.Provider>
   )
 }
 
