@@ -1,0 +1,21 @@
+.results {
+  display: flex;
+  flex-direction: column;
+  padding: 80px 102px;
+  background-color: #f5f6f7;
+}
+
+.results__title {
+  margin-bottom: 64px;
+  font-family: 'Roboto Slab';
+  font-weight: 400;
+  font-size: 40px;
+  line-height: 46px;
+}
+
+.results__cards {
+  display: grid;
+  grid-template-columns: repeat(3, 400px);
+  gap: 16px;
+  justify-content: center;
+}

@@ -8,6 +8,7 @@ import LoginModal from '../LoginModal/LoginModal'
 import RegisterModal from '../RegisterModal/RegisterModal'
 import SuccessModal from '../SuccessModal/SuccessModal'
 import { fetchNews, loginUser, registerUser } from '../../api'
+import SearchResults from '../SearchResults/SearchResults'
 
 function App() {
   const [activeModal, setActiveModal] = useState('')
@@ -50,9 +51,9 @@ function App() {
 
   const handleSearch = async userInput => {
     try {
-      const articles = await fetchNews(userInput)
+      const data = await fetchNews(userInput)
 
-      setArticles(articles)
+      setArticles(data.articles)
     } catch (err) {
       console.log('Error getting articles:', err)
     }
@@ -68,6 +69,7 @@ function App() {
           isLoggedIn={isLoggedIn}
         />
         <Main onSearch={handleSearch} />
+        <SearchResults articles={articles} />
         <About />
         <Footer />
       </div>

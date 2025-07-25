@@ -1,0 +1,60 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  max-width: 400px;
+  max-height: 576px;
+  border-radius: 25px;
+  background-color: white;
+}
+
+.card__image--wrapper {
+  min-height: 272px;
+  height: 100%;
+  border-top-left-radius: 25px;
+  border-top-right-radius: 25px;
+  overflow: hidden;
+}
+
+.card__image {
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  width: 100%;
+}
+
+.card__content {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  gap: 20px;
+}
+
+.card__date {
+  font-size: 18px;
+  color: #b6bcbf;
+  font-family: 'Inter';
+  font-weight: 400;
+}
+
+.card__title {
+  font-size: 26px;
+  font-family: 'Roboto Slab';
+  font-weight: 400;
+  line-height: 30px;
+}
+
+.card__description {
+  font-family: 'Roboto';
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 22px;
+  color: #1a1b22;
+}
+
+.card__publisher {
+  font-family: 'Roboto Slab';
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: 0.4px;
+  color: #b6bcbf;
+}
