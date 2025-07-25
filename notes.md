@@ -162,3 +162,78 @@
   - call onLogin api function and pass data as props
   - error handle
 - pass handleSubmit as prop to modal with form
+
+
+
+
+<!--------- GET ARTICLES FLOW ------------>
+- custom backend fetch to news api to hide api key
+
+<!-- article model -->
+- check api documentation
+- grab any needed data points
+- import mongoose with require
+- create new mongoose schema
+- type and required if applicable to all relevant data points
+- module.exports the mongoose model with its name as string and function
+
+<!-- controller -->
+- create async function named getNewsArticles that takes in a req, res, next params
+- extract the key word with req.query
+- validate query input
+- call news api using fetch and api key
+- await and parse response
+- res with status and json
+- catch errors
+
+<!-- route -->
+- create article route in index.js
+- use '/' and route to getNewsArticles controller
+
+<!-- frontend api -->
+- create a fetchNews function
+- await fetch to '/articles/keyword'
+- create POST method
+- send request with JSON stringify
+- return parsed json
+- catch errors
+
+<!-- app -->
+- define handleSearch function that takes in userInput
+- call fetchNews api function and await response
+- destructure articles from response
+- update articles state
+- catch errors
+- add showResults state (default false)
+- after setting articles in handleSearch:
+  - set showResults to true
+
+- articles state is passed to SearchResults component
+
+<!-- search -->
+- user inputs keyword
+- onChange e => e.target.value
+- updates state
+- on form submit
+  - prevent default behavior
+  - extract search keyword from state
+  - call handleSearch from app and input updated state
+  - clear input field
+
+<!-- search results -->
+- receive articles and showResults as prop
+- iterate over articles array using map
+- pass articles and index as props to map
+- add showMore state (default false)
+- if showMore is false
+  - slice articles to 3
+- else
+  - show full list
+- on 'Show more' button click
+  - toggle showMore to true
+
+
+
+
+
+<!------------ HANDLE SAVE NEWS FLOW ------------>

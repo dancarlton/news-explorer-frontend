@@ -15,6 +15,7 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [userData, setUserData] = useState('')
   const [articles, setArticles] = useState([])
+  const [showResults, setShowResults] = useState(false)
 
   const openLoginModal = () => setActiveModal('login')
   const openRegisterModal = () => setActiveModal('register')
@@ -54,6 +55,7 @@ function App() {
       const data = await fetchNews(userInput)
 
       setArticles(data.articles)
+      setShowResults(true)
     } catch (err) {
       console.log('Error getting articles:', err)
     }
@@ -69,7 +71,7 @@ function App() {
           isLoggedIn={isLoggedIn}
         />
         <Main onSearch={handleSearch} />
-        <SearchResults articles={articles} />
+        {showResults && <SearchResults articles={articles} />}
         <About />
         <Footer />
       </div>

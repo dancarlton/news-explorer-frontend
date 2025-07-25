@@ -20,7 +20,7 @@ export default function NewsCards({ article }) {
           alt={article.source.name}
           className='card__image'
         />
-        {/* <a href='' className='card__bookmark'></a> */}
+        <div className='card__bookmark'></div>
       </div>
       <div className='card__content'>
         <h4 className='card__date'>{formattedDate}</h4>
