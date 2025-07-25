@@ -92,6 +92,7 @@
   z-index: 10;
   border-radius: 10px;
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
 }
 
 .card__bookmark:hover {
@@ -100,4 +101,22 @@
 
 .card__bookmark:active {
   background-image: url('../../assets/images/card-bookmark-marked.svg');
+}
+
+
+.card__sign-in {
+  z-index: 10;
+  width: 182px;
+  height: 40px;
+  position: absolute;
+  background-color: white;
+  top: 16px;
+  right: 62px;
+  border: none;
+  font-family: 'Roboto';
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 100%;
+  border-radius: 10px;
+  cursor: pointer;
 }

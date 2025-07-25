@@ -1,6 +1,6 @@
 import './NewsCards.css'
 
-export default function NewsCards({ article }) {
+export default function NewsCards({ article, isLoggedIn, onLoginClick }) {
   const options = {
     month: 'long',
     day: 'numeric',
@@ -20,6 +20,9 @@ export default function NewsCards({ article }) {
           alt={article.source.name}
           className='card__image'
         />
+        {!isLoggedIn && (
+          <button className='card__sign-in' onClick={onLoginClick}>Sign in to save articles</button>
+        )}
         <div className='card__bookmark'></div>
       </div>
       <div className='card__content'>

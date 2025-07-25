@@ -71,7 +71,9 @@ function App() {
           isLoggedIn={isLoggedIn}
         />
         <Main onSearch={handleSearch} />
-        {showResults && <SearchResults articles={articles} />}
+        {showResults && (
+          <SearchResults articles={articles} isLoggedIn={isLoggedIn} onLoginClick={openLoginModal}/>
+        )}
         <About />
         <Footer />
       </div>
