@@ -10,6 +10,7 @@ import SuccessModal from '../SuccessModal/SuccessModal'
 import { fetchNews, loginUser, registerUser } from '../../api'
 import SearchResults from '../SearchResults/SearchResults'
 import CurrentUserContext from '../../context/CurrentUserContext'
+import { useNavigate } from 'react-router'
 
 function App() {
   const [activeModal, setActiveModal] = useState('')
@@ -23,12 +24,12 @@ function App() {
   const openSuccessModal = () => setActiveModal('success')
   const closeActiveModal = () => setActiveModal('')
 
+  const navigate = useNavigate()
+
   const handleLogin = async (email, password) => {
     try {
-      console.log('Login in user')
       const { user, token } = await loginUser(email, password)
       localStorage.setItem('jwt', token)
-      console.log('Successfully logged in user:', user)
       setUserData(user)
       setIsLoggedIn(true)
       setActiveModal('')
@@ -64,8 +65,10 @@ function App() {
 
   const handleLogout = () => {
     try {
-      console.log('User Logged Out')
       localStorage.removeItem('jwt')
+      setUserData('')
+      setIsLoggedIn(false)
+      navigate('/')
     } catch (err) {
       console.log('Could not log out user:', err)
     }
@@ -80,6 +83,7 @@ function App() {
             onRegisterClick={openRegisterModal}
             onClose={closeActiveModal}
             isLoggedIn={isLoggedIn}
+            onLogoutClick={handleLogout}
           />
           <Main onSearch={handleSearch} />
           {showResults && (

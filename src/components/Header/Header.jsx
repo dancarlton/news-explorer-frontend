@@ -3,7 +3,7 @@ import './Header.css'
 import { Link, NavLink, useLocation } from 'react-router'
 import CurrentUserContext from '../../context/CurrentUserContext'
 
-export default function Header({ onLoginClick, isLoggedIn }) {
+export default function Header({ onLoginClick, isLoggedIn, onLogoutClick }) {
   const user = useContext(CurrentUserContext)
   const { pathname } = useLocation()
   const savedNewsRoute = pathname === '/saved-news'
@@ -58,7 +58,7 @@ export default function Header({ onLoginClick, isLoggedIn }) {
               </NavLink>
             </div>
             <div className='header__button--wrapper'>
-              <button
+              <button onClick={onLogoutClick}
                 className={`header__button--signout ${
                   isLoggedIn && savedNewsRoute
                     ? 'header__button--signout--saved-articles'

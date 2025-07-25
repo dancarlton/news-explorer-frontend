@@ -165,6 +165,21 @@
 
 
 
+<!------------ HANDLE LOGOUT FLOW ------------>
+<!-- app -->
+- define handleLogout function
+- remove 'jwt' token from local storage
+- reset userData state to null or empty object
+- set isLoggedIn to false
+- navigate to homepage or public route
+- optionally show toast or message
+- pass handleLogout as prop to header
+
+<!-- header / nav -->
+- check isLoggedIn boolean
+- if true, show "Logout" button
+- on button click, call handleLogout
+
 
 <!--------- GET ARTICLES FLOW ------------>
 - custom backend fetch to news api to hide api key
