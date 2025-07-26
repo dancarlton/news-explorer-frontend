@@ -2,7 +2,7 @@ import { useState } from 'react'
 import NewsCards from '../NewsCards/NewsCards'
 import './SearchResults.css'
 
-export default function SearchResults({ articles, isLoggedIn, onLoginClick }) {
+export default function SearchResults({ articles, isLoggedIn, onLoginClick, onSave }) {
   const [showMore, setShowMore] = useState(false)
 
   const visibleArticles = showMore ? articles : articles.slice(0, 3)
@@ -17,6 +17,7 @@ export default function SearchResults({ articles, isLoggedIn, onLoginClick }) {
             key={index}
             isLoggedIn={isLoggedIn}
             onLoginClick={onLoginClick}
+            onSave={onSave}
           />
         ))}
       </div>

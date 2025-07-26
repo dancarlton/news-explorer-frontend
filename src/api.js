@@ -50,3 +50,21 @@ export async function fetchNews(userInput) {
 
   return await response.json()
 }
+
+export async function saveArticles(articleData) {
+  const token = localStorage.getItem('jwt')
+  const response = await fetch(`${baseUrl}/articles/saved-news`, {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(articleData)
+  })
+
+    if (!response.ok) {
+      throw new Error('Failed to save article')
+    }
+
+    return await response.json()
+}

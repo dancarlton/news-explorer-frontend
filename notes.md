@@ -252,3 +252,48 @@
 
 
 <!------------ HANDLE SAVE NEWS FLOW ------------>
+
+<!-- Article model -->
+- define articleSchema with mongoose
+- include fields from news API documentation
+- export Article model
+
+<!-- User model -->
+- reference Article with savedArticles: {type: mongoose.Schema.Types.ObjectId, ref: 'Article'}
+
+<!-- controller -->
+- exports.saveArticles async function
+- extract article data with req.body
+- validate all fields required
+- create new Article function document in DB will extracted data
+- respond with saved Article and status 200
+- catch & pass errors
+
+<!-- routes -->
+- create POST /saved-news route
+- protect route with middleware
+- route to savedArticles controller
+
+<!-- frontend api -->
+- create saveArticle async function
+- await fetch to POST article
+- include JWT token in header
+- send article data in JSON stringify body
+- await return parsed json
+
+<!-- app -->
+- define handleSaveArticle async function
+- try
+  - call saveArticle function with article data
+  - update saved articles state
+- catch
+  - handle log and error
+- pass function as prop to news card component
+
+<!-- newscard -->
+- create savedArticle state
+- on icon click
+  - call handleSavedArticle and pass article data
+  - toggle savedArticle state
+  - update icon to marked svg
+  - if article is already saved, show saved state

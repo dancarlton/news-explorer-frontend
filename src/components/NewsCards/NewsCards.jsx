@@ -1,6 +1,6 @@
 import './NewsCards.css'
 
-export default function NewsCards({ article, isLoggedIn, onLoginClick }) {
+export default function NewsCards({ article, isLoggedIn, onLoginClick, onSave }) {
   const options = {
     month: 'long',
     day: 'numeric',
@@ -23,7 +23,7 @@ export default function NewsCards({ article, isLoggedIn, onLoginClick }) {
         {!isLoggedIn && (
           <button className='card__sign-in' onClick={onLoginClick}>Sign in to save articles</button>
         )}
-        <div className='card__bookmark'></div>
+        <div onClick={() => onSave(article)} className='card__bookmark'></div>
       </div>
       <div className='card__content'>
         <h4 className='card__date'>{formattedDate}</h4>

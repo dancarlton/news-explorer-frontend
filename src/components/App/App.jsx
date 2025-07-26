@@ -7,7 +7,7 @@ import Footer from '../Footer/Footer'
 import LoginModal from '../LoginModal/LoginModal'
 import RegisterModal from '../RegisterModal/RegisterModal'
 import SuccessModal from '../SuccessModal/SuccessModal'
-import { fetchNews, loginUser, registerUser } from '../../api'
+import { fetchNews, loginUser, registerUser, saveArticles } from '../../api'
 import SearchResults from '../SearchResults/SearchResults'
 import CurrentUserContext from '../../context/CurrentUserContext'
 import { useNavigate } from 'react-router'
@@ -74,6 +74,16 @@ function App() {
     }
   }
 
+  const handleSaveArticle = async articleData => {
+    try {
+      console.log(articleData)
+      const savedArticle = await saveArticles(articleData)
+      console.log('Article saved:', savedArticle)
+    } catch (err) {
+      console.log('Could not save article:', err)
+    }
+  }
+
   return (
     <CurrentUserContext.Provider value={userData}>
       <div className='page'>
@@ -91,6 +101,7 @@ function App() {
               articles={articles}
               isLoggedIn={isLoggedIn}
               onLoginClick={openLoginModal}
+              onSave={handleSaveArticle}
             />
           )}
           <About />
