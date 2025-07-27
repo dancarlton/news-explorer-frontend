@@ -1,6 +1,12 @@
 import './NewsCards.css'
 
-export default function NewsCards({ article, isLoggedIn, onLoginClick, onSave }) {
+export default function NewsCards({
+  article,
+  savedArticles,
+  isLoggedIn,
+  onLoginClick,
+  onArticleSave,
+}) {
   const options = {
     month: 'long',
     day: 'numeric',
@@ -12,6 +18,8 @@ export default function NewsCards({ article, isLoggedIn, onLoginClick, onSave })
   )
   const formattedAuthor = article.author ? article.author.toUpperCase() : ''
 
+  const isSaved = savedArticles?.some(saved => saved.url === article.url)
+
   return (
     <div className='card'>
       <div className='card__image--wrapper'>
@@ -21,9 +29,14 @@ export default function NewsCards({ article, isLoggedIn, onLoginClick, onSave })
           className='card__image'
         />
         {!isLoggedIn && (
-          <button className='card__sign-in' onClick={onLoginClick}>Sign in to save articles</button>
+          <button className='card__sign-in' onClick={onLoginClick}>
+            Sign in to save articles
+          </button>
         )}
-        <div onClick={() => onSave(article)} className='card__bookmark'></div>
+        <div
+          onClick={() => onArticleSave(article)}
+          className={`card__bookmark ${isSaved ? 'card__bookmark--saved' : ''}`}
+        ></div>
       </div>
       <div className='card__content'>
         <h4 className='card__date'>{formattedDate}</h4>

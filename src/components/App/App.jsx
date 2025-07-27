@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
 import Main from '../Main/Main'
 import Header from '../Header/Header'
@@ -7,7 +7,13 @@ import Footer from '../Footer/Footer'
 import LoginModal from '../LoginModal/LoginModal'
 import RegisterModal from '../RegisterModal/RegisterModal'
 import SuccessModal from '../SuccessModal/SuccessModal'
-import { fetchNews, loginUser, registerUser, saveArticles } from '../../api'
+import {
+  getSavedArticles,
+  loginUser,
+  registerUser,
+  saveArticles,
+  searchNews,
+} from '../../api'
 import SearchResults from '../SearchResults/SearchResults'
 import CurrentUserContext from '../../context/CurrentUserContext'
 import { useNavigate } from 'react-router'
@@ -18,6 +24,7 @@ function App() {
   const [userData, setUserData] = useState('')
   const [articles, setArticles] = useState([])
   const [showResults, setShowResults] = useState(false)
+  const [savedArticles, setSavedArticles] = useState([])
 
   const openLoginModal = () => setActiveModal('login')
   const openRegisterModal = () => setActiveModal('register')
@@ -33,6 +40,7 @@ function App() {
       setUserData(user)
       setIsLoggedIn(true)
       setActiveModal('')
+
       navigate('/')
     } catch (err) {
       console.log('Error logging in user:', err)
@@ -54,7 +62,7 @@ function App() {
 
   const handleSearch = async userInput => {
     try {
-      const data = await fetchNews(userInput)
+      const data = await searchNews(userInput)
 
       setArticles(data.articles)
       setShowResults(true)
@@ -75,14 +83,39 @@ function App() {
   }
 
   const handleSaveArticle = async articleData => {
+    const alreadySavedArticle = savedArticles?.some(
+      saved => saved.url === articleData.url
+    )
+    if (alreadySavedArticle) {
+      console.log('Article already saved')
+      return
+    }
+
     try {
-      console.log(articleData)
       const savedArticle = await saveArticles(articleData)
-      console.log('Article saved:', savedArticle)
+      // console.log('Saved article url:', savedArticle.url)
+      // console.log('Original article url:', articleData.url)
+
+      setSavedArticles(prev => [...prev, savedArticle])
     } catch (err) {
       console.log('Could not save article:', err)
     }
   }
+
+  useEffect(() => {
+    const fetchSavedArticles = async () => {
+      try {
+        const saved = await getSavedArticles()
+        setSavedArticles(saved)
+      } catch (err) {
+        console.log('Could not load saved articles:', err)
+      }
+    }
+
+    if (isLoggedIn) {
+      fetchSavedArticles()
+    }
+  }, [isLoggedIn])
 
   return (
     <CurrentUserContext.Provider value={userData}>
@@ -99,9 +132,10 @@ function App() {
           {showResults && (
             <SearchResults
               articles={articles}
+              savedArticles={savedArticles}
               isLoggedIn={isLoggedIn}
               onLoginClick={openLoginModal}
-              onSave={handleSaveArticle}
+              onArticleSave={handleSaveArticle}
             />
           )}
           <About />

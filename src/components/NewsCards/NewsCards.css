@@ -95,14 +95,13 @@
   cursor: pointer;
 }
 
-.card__bookmark:hover {
-  background-image: url('../../assets/images/card-bookmark-hover.svg');
-}
-
-.card__bookmark:active {
+.card__bookmark--saved {
   background-image: url('../../assets/images/card-bookmark-marked.svg');
 }
 
+.card__bookmark:not(.card__bookmark--saved):hover {
+  background-image: url('../../assets/images/card-bookmark-hover.svg');
+}
 
 .card__sign-in {
   z-index: 10;

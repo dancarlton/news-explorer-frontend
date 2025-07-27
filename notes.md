@@ -290,10 +290,78 @@
   - handle log and error
 - pass function as prop to news card component
 
+- on login or mount, call getSavedArticles
+  - define useEffect
+  - inside useEffect, define async fetch function
+  - call getSavedArticles API function
+  - set savedArticles state
+  - add dependency: isLoggedIn
+  - store result in savedArticles
+- pass savedArticles and handleSaveArticle to NewsCard
+
 <!-- newscard -->
-- create savedArticle state
 - on icon click
   - call handleSavedArticle and pass article data
   - toggle savedArticle state
   - update icon to marked svg
   - if article is already saved, show saved state
+- check if article already exists in savedArticles (by link or title)
+- if it doesn't, call saveArticles(article)
+- on success, update savedArticles state with new article
+
+
+<!------------ HANDLE BOOKMARK STATE FLOW ------------>
+
+<!-- backend -->
+- create POST /articles route to save an article
+- use auth middleware to attach user ID
+- create article in DB and associate owner field
+
+- create GET /articles/saved-news route
+
+- extract user id
+- await find Article by owner
+- check if article exists
+- return json saved Article
+
+<!-- frontend api -->
+- create getSavedArticles function
+  - GET /articles
+  - include JWT token in Authorization header
+  - return saved articles array
+
+- create saveArticle function
+  - POST /articles
+  - include article data and JWT token
+  - return saved article
+
+<!-- app -->
+- define savedArticles state
+- useEffect on isLoggedIn
+  - call getSavedArticles
+  - set savedArticles state
+
+- define handleSaveArticle function
+  - check if article is already in savedArticles (compare ids)
+  - if not saved:
+    - call saveArticle with article data
+    - on success, add to savedArticles state
+
+- pass savedArticles and handleSaveArticle as props to NewsCard
+
+<!-- NewsCard -->
+- receives article, savedArticles, and onSave as props
+- compare: savedArticles.some(saved => saved.link === article.url)
+- store result in isSaved variable
+
+- render bookmark icon
+  - if isSaved is true → show filled icon
+  - else → show empty icon
+
+- onClick of bookmark:
+  - call onSave(article)
+
+<!-- CSS -->
+- .card__bookmark: default style (empty icon)
+- .card__bookmark--active: filled icon
+- toggle class based on isSaved
