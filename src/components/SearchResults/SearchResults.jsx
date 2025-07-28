@@ -8,6 +8,7 @@ export default function SearchResults({
   isLoggedIn,
   onLoginClick,
   onArticleSave,
+  onDeleteClick,
   hideTitle = false,
   disableLimit = false,
 }) {
@@ -28,6 +29,7 @@ export default function SearchResults({
             isLoggedIn={isLoggedIn}
             onLoginClick={onLoginClick}
             onArticleSave={onArticleSave}
+            onDeleteClick={onDeleteClick}
           />
         ))}
       </div>

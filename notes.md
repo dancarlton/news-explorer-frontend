@@ -365,3 +365,38 @@
 - .card__bookmark: default style (empty icon)
 - .card__bookmark--active: filled icon
 - toggle class based on isSaved
+
+
+
+<!------------ HANDLE DELETE ARTICLE ------------>
+<!-- controller -->
+- create async function name deleteArticle
+- extract article id with req.params.id
+- validate id
+- create Article delete await function
+- res status
+- catch errors
+
+<!-- route -->
+- create DELETE route with auth and call deleteArticle function
+
+<!-- frontend api -->
+- create deleteArticle function
+- await fetch to route
+- create DELETE method
+- use authorization token header
+- parse and return json
+- catch errors
+
+<!-- app -->
+- create handleDelete function with articleId prop
+- call deleteArticle function
+- update savedArticles state using filter to remove article
+- catch errors
+
+<!-- search results -->
+- pass handleDelete as prop
+
+<!-- news card -->
+- conditionally render delete icon if on saved articles page
+- onClick call handleDelete with article id

@@ -1,3 +1,4 @@
+import { useLocation } from 'react-router'
 import './NewsCards.css'
 
 export default function NewsCards({
@@ -6,6 +7,7 @@ export default function NewsCards({
   isLoggedIn,
   onLoginClick,
   onArticleSave,
+  onDeleteClick,
 }) {
   const options = {
     month: 'long',
@@ -20,6 +22,9 @@ export default function NewsCards({
 
   const isSaved = savedArticles?.some(saved => saved.url === article.url)
 
+  const location = useLocation()
+  const savedNewsRoute = location.pathname === '/saved-news'
+
   return (
     <div className='card'>
       <div className='card__image--wrapper'>
@@ -33,10 +38,16 @@ export default function NewsCards({
             Sign in to save articles
           </button>
         )}
-        <div
-          onClick={() => onArticleSave(article)}
-          className={`card__bookmark ${isSaved ? 'card__bookmark--saved' : ''}`}
-        ></div>
+        {!savedNewsRoute && (
+          <div
+            onClick={() => onArticleSave(article)}
+            className={`card__bookmark ${
+              isSaved ? 'card__bookmark--saved' : ''
+            }`}
+          ></div>
+        )}
+
+        {savedNewsRoute && <div onClick={() => onDeleteClick(article)} className='card__delete'></div>}
       </div>
       <div className='card__content'>
         <h4 className='card__date'>{formattedDate}</h4>

@@ -119,3 +119,23 @@
   border-radius: 10px;
   cursor: pointer;
 }
+
+.card__delete {
+  background-image: url('../../assets/images/card-delete-normal.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 40px;
+  height: 40px;
+  z-index: 10;
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 10;
+  border-radius: 10px;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+
+.card__delete:hover {
+  background-image: url('../../assets/images/card-delete-hover.svg');
+}

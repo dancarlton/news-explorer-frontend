@@ -3,7 +3,7 @@ import { useContext } from 'react'
 import CurrentUserContext from '../../context/CurrentUserContext'
 import SearchResults from '../../components/SearchResults/SearchResults'
 
-export default function SavedArticlesPage({ savedArticles, isLoggedIn }) {
+export default function SavedArticlesPage({ savedArticles, isLoggedIn, onDeleteClick }) {
   const user = useContext(CurrentUserContext)
 
   const savedArticlesAmount = user?.savedArticles?.length || 0
@@ -26,6 +26,7 @@ export default function SavedArticlesPage({ savedArticles, isLoggedIn }) {
           isLoggedIn={isLoggedIn}
           hideTitle={true}
           disableLimit={true}
+          onDeleteClick={onDeleteClick}
         />
       </div>
     </div>

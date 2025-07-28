@@ -100,3 +100,20 @@ export async function getSavedArticles() {
 
   return await response.json()
 }
+
+export async function deleteArticle(articleId) {
+  const token = localStorage.getItem('jwt')
+  const response = await fetch(`${baseUrl}/articles/${articleId}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+  })
+
+  if (!response.ok) {
+    throw new Error('Failed to delete News Article')
+  }
+
+  return await response.json()
+}

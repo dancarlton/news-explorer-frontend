@@ -8,6 +8,7 @@ import LoginModal from '../LoginModal/LoginModal'
 import RegisterModal from '../RegisterModal/RegisterModal'
 import SuccessModal from '../SuccessModal/SuccessModal'
 import {
+  deleteArticle,
   getSavedArticles,
   getUser,
   loginUser,
@@ -105,6 +106,15 @@ function App() {
     }
   }
 
+  const handleDelete = async article => {
+    try {
+      await deleteArticle(article._id)
+      setSavedArticles(prev => prev.filter(saved => saved._id !== article._id))
+    } catch (err) {
+      console.log('Could not delete article:', err)
+    }
+  }
+
   useEffect(() => {
     const token = localStorage.getItem('jwt')
     if (token) {
@@ -168,6 +178,7 @@ function App() {
                   articles={articles}
                   savedArticles={savedArticles}
                   isLoggedIn={isLoggedIn}
+                  onDeleteClick={handleDelete}
                 />
               }
             />
