@@ -9,6 +9,7 @@ import RegisterModal from '../RegisterModal/RegisterModal'
 import SuccessModal from '../SuccessModal/SuccessModal'
 import {
   getSavedArticles,
+  getUser,
   loginUser,
   registerUser,
   saveArticles,
@@ -16,7 +17,9 @@ import {
 } from '../../api'
 import SearchResults from '../SearchResults/SearchResults'
 import CurrentUserContext from '../../context/CurrentUserContext'
-import { useNavigate } from 'react-router'
+import { Route, Routes, useNavigate } from 'react-router'
+import HomePage from '../../pages/HomePage'
+import SavedArticlesPage from '../../pages/SavedArticlePage/SavedArticlePage'
 
 function App() {
   const [activeModal, setActiveModal] = useState('')
@@ -103,6 +106,21 @@ function App() {
   }
 
   useEffect(() => {
+    const token = localStorage.getItem('jwt')
+    if (token) {
+      getUser(token)
+        .then(user => {
+          setUserData(user)
+          setIsLoggedIn(true)
+        })
+        .catch(err => {
+          console.log('Token check failed:', err)
+          localStorage.removeItem('jwt')
+        })
+    }
+  }, [])
+
+  useEffect(() => {
     const fetchSavedArticles = async () => {
       try {
         const saved = await getSavedArticles()
@@ -120,27 +138,42 @@ function App() {
   return (
     <CurrentUserContext.Provider value={userData}>
       <div className='page'>
+        <Header
+          onLoginClick={openLoginModal}
+          onRegisterClick={openRegisterModal}
+          onClose={closeActiveModal}
+          isLoggedIn={isLoggedIn}
+          onLogoutClick={handleLogout}
+        />
         <div className='page__content'>
-          <Header
-            onLoginClick={openLoginModal}
-            onRegisterClick={openRegisterModal}
-            onClose={closeActiveModal}
-            isLoggedIn={isLoggedIn}
-            onLogoutClick={handleLogout}
-          />
-          <Main onSearch={handleSearch} />
-          {showResults && (
-            <SearchResults
-              articles={articles}
-              savedArticles={savedArticles}
-              isLoggedIn={isLoggedIn}
-              onLoginClick={openLoginModal}
-              onArticleSave={handleSaveArticle}
+          <Routes>
+            <Route
+              path='/'
+              element={
+                <HomePage
+                  onSearch={handleSearch}
+                  articles={articles}
+                  savedArticles={savedArticles}
+                  isLoggedIn={isLoggedIn}
+                  onLoginClick={openLoginModal}
+                  onArticleSave={handleSaveArticle}
+                  showResults={showResults}
+                />
+              }
             />
-          )}
-          <About />
-          <Footer />
+            <Route
+              path='/saved-news'
+              element={
+                <SavedArticlesPage
+                  articles={articles}
+                  savedArticles={savedArticles}
+                  isLoggedIn={isLoggedIn}
+                />
+              }
+            />
+          </Routes>
         </div>
+        <Footer />
 
         <LoginModal
           isOpen={activeModal === 'login'}

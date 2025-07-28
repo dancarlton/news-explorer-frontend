@@ -1,0 +1,44 @@
+.saved-articles {
+  padding-top: 104px;
+
+}
+
+.saved-articles__content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 50%;
+  padding: 0px 104px 40px;
+}
+
+.saved-articles__title {
+  color: #1a1b2280;
+  font-family: 'Roboto';
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 24px;
+}
+
+.saved-articles__greeting {
+  color: #1a1b22;
+  font-family: 'Roboto Slab';
+  font-weight: 400;
+  font-size: 40px;
+  line-height: 46px;
+}
+
+.saved-articles__keywords {
+  color: #1a1b22;
+  font-family: 'Roboto';
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 24px;
+}
+
+.saved-articles__keywords span {
+    font-weight: 700;
+}
+
+.saved-articles__cards {
+    
+}

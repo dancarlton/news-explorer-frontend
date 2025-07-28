@@ -34,6 +34,23 @@ export async function loginUser(email, password) {
   return await response.json()
 }
 
+export async function getUser(token) {
+  const response = await fetch(`${baseUrl}/users/me`, {
+    method: 'GET',
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
+  })
+
+  if (!response.ok) {
+    const errorBody = await response.json()
+    throw new Error(errorBody.message || 'Failed to login')
+  }
+
+  return await response.json()
+}
+
 export async function searchNews(userInput) {
   const response = await fetch(`${baseUrl}/articles?q=${userInput}`, {
     method: 'GET',
@@ -48,7 +65,6 @@ export async function searchNews(userInput) {
 
   return await response.json()
 }
-
 
 export async function saveArticles(articleData) {
   const token = localStorage.getItem('jwt')
@@ -68,14 +84,13 @@ export async function saveArticles(articleData) {
   return await response.json()
 }
 
-
 export async function getSavedArticles() {
   const token = localStorage.getItem('jwt')
   const response = await fetch(`${baseUrl}/articles/saved-news`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`
+      Authorization: `Bearer ${token}`,
     },
   })
 
