@@ -6,7 +6,7 @@ import SearchResults from '../../components/SearchResults/SearchResults'
 export default function SavedArticlesPage({ savedArticles, isLoggedIn, onDeleteClick }) {
   const user = useContext(CurrentUserContext)
 
-  const savedArticlesAmount = user?.savedArticles?.length || 0
+  const savedArticlesAmount = savedArticles?.length || 0
 
   return (
     <div className='saved-articles'>
