@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react'
 import './App.css'
-import Main from '../Main/Main'
 import Header from '../Header/Header'
-import About from '../About/About'
 import Footer from '../Footer/Footer'
 import LoginModal from '../LoginModal/LoginModal'
 import RegisterModal from '../RegisterModal/RegisterModal'
@@ -16,7 +14,6 @@ import {
   saveArticles,
   searchNews,
 } from '../../api'
-import SearchResults from '../SearchResults/SearchResults'
 import CurrentUserContext from '../../context/CurrentUserContext'
 import { Route, Routes, useNavigate } from 'react-router'
 import HomePage from '../../pages/HomePage'
@@ -29,10 +26,10 @@ function App() {
   const [articles, setArticles] = useState([])
   const [showResults, setShowResults] = useState(false)
   const [savedArticles, setSavedArticles] = useState([])
+  const [isLoading, setIsLoading] = useState(false)
 
   const openLoginModal = () => setActiveModal('login')
   const openRegisterModal = () => setActiveModal('register')
-  const openSuccessModal = () => setActiveModal('success')
   const closeActiveModal = () => setActiveModal('')
 
   const navigate = useNavigate()
@@ -66,10 +63,12 @@ function App() {
 
   const handleSearch = async userInput => {
     try {
+      setIsLoading(true)
       const data = await searchNews(userInput)
 
       setArticles(data.articles)
       setShowResults(true)
+      setIsLoading(false)
     } catch (err) {
       console.log('Error getting articles:', err)
     }
@@ -168,6 +167,7 @@ function App() {
                   onLoginClick={openLoginModal}
                   onArticleSave={handleSaveArticle}
                   showResults={showResults}
+                  isLoading={isLoading}
                 />
               }
             />

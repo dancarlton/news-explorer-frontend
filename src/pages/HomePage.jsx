@@ -1,5 +1,6 @@
 import About from '../components/About/About'
 import Main from '../components/Main/Main'
+import Preloader from '../components/Preloader/Preloader'
 import SearchResults from '../components/SearchResults/SearchResults'
 
 export default function HomePage({
@@ -10,10 +11,12 @@ export default function HomePage({
   onLoginClick,
   onArticleSave,
   showResults,
+  isLoading,
 }) {
   return (
     <>
       <Main onSearch={onSearch} />
+      {isLoading && <Preloader />}
       {showResults && (
         <SearchResults
           articles={articles}
