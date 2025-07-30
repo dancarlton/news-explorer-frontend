@@ -139,3 +139,27 @@
 .card__delete:hover {
   background-image: url('../../assets/images/card-delete-hover.svg');
 }
+
+.card__keyword {
+  display: flex;
+    width: 87px;
+  height: 40px;
+  background-color: white;
+  color: black;
+  z-index: 10;
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  z-index: 10;
+  border-radius: 10px;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+justify-content: center;
+align-items: center;
+font-family: 'Roboto';
+font-weight: 500;
+font-size: 14px;
+line-height: 24px;
+
+
+}

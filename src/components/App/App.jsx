@@ -27,6 +27,7 @@ function App() {
   const [showResults, setShowResults] = useState(false)
   const [savedArticles, setSavedArticles] = useState([])
   const [isLoading, setIsLoading] = useState(false)
+  const [keyword, setKeyword] = useState('')
 
   const openLoginModal = () => setActiveModal('login')
   const openRegisterModal = () => setActiveModal('register')
@@ -65,7 +66,7 @@ function App() {
     try {
       setIsLoading(true)
       const data = await searchNews(userInput)
-
+      setKeyword(userInput)
       setArticles(data.articles)
       setShowResults(true)
       setIsLoading(false)
@@ -95,7 +96,7 @@ function App() {
     }
 
     try {
-      const savedArticle = await saveArticles(articleData)
+      const savedArticle = await saveArticles({...articleData, keyword: keyword})
       // console.log('Saved article url:', savedArticle.url)
       // console.log('Original article url:', articleData.url)
 

@@ -19,7 +19,10 @@ export default function NewsCards({
     options
   )
   const formattedAuthor = article.author ? article.author.toUpperCase() : ''
-
+  const formattedKeyword = article.keyword
+    ? article.keyword.charAt(0).toUpperCase() +
+      article.keyword.slice(1).toLowerCase()
+    : ''
   const isSaved = savedArticles?.some(saved => saved.url === article.url)
 
   const location = useLocation()
@@ -47,7 +50,15 @@ export default function NewsCards({
           ></div>
         )}
 
-        {savedNewsRoute && <div onClick={() => onDeleteClick(article)} className='card__delete'></div>}
+        {savedNewsRoute && (
+          <>
+            <div className='card__keyword'>{formattedKeyword}</div>
+            <div
+              onClick={() => onDeleteClick(article)}
+              className='card__delete'
+            ></div>
+          </>
+        )}
       </div>
       <div className='card__content'>
         <h4 className='card__date'>{formattedDate}</h4>
