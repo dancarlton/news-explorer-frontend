@@ -16,7 +16,9 @@ export default function HomePage({
   return (
     <>
       <Main onSearch={onSearch} />
-      {isLoading && <Preloader />}
+      {isLoading && (
+        <Preloader isLoading={isLoading} articles={articles} />
+      )}
       {showResults && (
         <SearchResults
           articles={articles}
