@@ -140,3 +140,10 @@
 .header__button--icon--saved-articles {
   background-image: url('../../assets/images/logout-black.svg');
 }
+
+
+@media (max-width: 786px) {
+  .header__logo {
+    font-size: 14px;
+  }
+}
