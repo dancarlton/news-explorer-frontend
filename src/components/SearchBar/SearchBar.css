@@ -43,3 +43,28 @@
 .searchbar__button:active {
   background-color: #2a65cc;
 }
+
+@media (max-width: 786px) {
+  .searchbar {
+    flex-direction: column;
+    height: auto;
+    border-radius: 30px;
+    overflow: hidden;
+    gap: 16px;
+    background-color: transparent;
+  }
+
+  .searchbar__input {
+    width: 100%;
+    height: 56px;
+    border-radius: 999px;
+    border-bottom: 1px solid #eee;
+    padding: 16px 20px;
+  }
+
+  .searchbar__button {
+    width: 100%;
+    border-radius: 999px;
+    padding: 16px 20px;
+  }
+}
